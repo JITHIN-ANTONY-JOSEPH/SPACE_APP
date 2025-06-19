@@ -74,7 +74,14 @@ st.write(f"**Old Type:** {record['space_type']}")
 st.write(f"**Department:** {record['department_occupied']}")
 # Optional alias input
 st.markdown("### 🏷️ Optional Alias")
+
+# Reset alias if the record has changed
+if st.session_state.get("current_id") != record["ID"]:
+    st.session_state.alias_name = ""
+    st.session_state.current_id = record["ID"]
+
 alias_name = st.text_input("New Space Alias Name (Optional)", value=st.session_state.alias_name)
+
 
 # category_options = sorted(options_df["SPACE CATEGORY"].unique())
 # selected_cat = st.selectbox("New Category", category_options)
@@ -138,8 +145,9 @@ with col1:
         else:
             new_row.to_csv("responses.csv", mode='w', header=True, index=False)
 
-        st.session_state.alias_name = ""
+        
         st.success("✅ Response recorded. Loading next record...")
+        st.session_state.alias_name = ""
         st.rerun()
 
 # ⏭️ SKIP BUTTON
