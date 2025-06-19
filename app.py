@@ -51,6 +51,8 @@ st.progress(progress_pct)
 if "skipped_ids" not in st.session_state:
     st.session_state.skipped_ids = set()
 
+if "alias_name" not in st.session_state:
+    st.session_state.alias_name = ""
 
 # Find the next unfilled record
 filled_ids = set(responses_df["ID"].unique())
@@ -72,7 +74,7 @@ st.write(f"**Old Type:** {record['space_type']}")
 st.write(f"**Department:** {record['department_occupied']}")
 # Optional alias input
 st.markdown("### 🏷️ Optional Alias")
-alias_name = st.text_input("New Space Alias Name (Optional)")
+alias_name = st.text_input("New Space Alias Name (Optional)", value=st.session_state.alias_name)
 
 # category_options = sorted(options_df["SPACE CATEGORY"].unique())
 # selected_cat = st.selectbox("New Category", category_options)
@@ -136,6 +138,7 @@ with col1:
         else:
             new_row.to_csv("responses.csv", mode='w', header=True, index=False)
 
+        st.session_state.alias_name = ""
         st.success("✅ Response recorded. Loading next record...")
         st.rerun()
 
