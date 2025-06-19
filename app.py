@@ -180,6 +180,9 @@ with st.expander("➕ Add Hierarchy"):
         else:
             st.warning("⚠️ Please fill in all three fields before submitting.")
 
+if os.path.exists("responses.csv"):
+    with open("responses.csv", "rb") as f:
+        st.download_button("⬇️ Download responses.csv", f, file_name="responses.csv")
 
 st.markdown("---")
 if st.button("❌ Kill App / End Session"):
