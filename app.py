@@ -51,8 +51,6 @@ st.progress(progress_pct)
 if "skipped_ids" not in st.session_state:
     st.session_state.skipped_ids = set()
 
-if "alias_name" not in st.session_state:
-    st.session_state.alias_name = ""
 
 # Find the next unfilled record
 filled_ids = set(responses_df["ID"].unique())
@@ -151,7 +149,6 @@ with col1:
 
         
         st.success("✅ Response recorded. Loading next record...")
-        st.session_state.alias_name = ""
         st.rerun()
 
 # ⏭️ SKIP BUTTON
