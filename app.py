@@ -80,7 +80,11 @@ if st.session_state.get("current_id") != record["ID"]:
     st.session_state.alias_name = ""
     st.session_state.current_id = record["ID"]
 
-alias_name = st.text_input("New Space Alias Name (Optional)", value=st.session_state.alias_name)
+alias_name = st.text_input(
+    "New Space Alias Name (Optional)",
+    key="alias_name"
+)
+
 
 
 # category_options = sorted(options_df["SPACE CATEGORY"].unique())
